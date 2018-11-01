@@ -16,13 +16,17 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.WindowManager;
+import android.widget.ImageView;
 
+import com.android.floatwindowpermission.R;
 import com.android.permission.rom.HuaweiUtils;
 import com.android.permission.rom.MeizuUtils;
 import com.android.permission.rom.MiuiUtils;
 import com.android.permission.rom.OppoUtils;
 import com.android.permission.rom.QikuUtils;
 import com.android.permission.rom.RomUtils;
+import com.android.permission.views.BottomBarView;
+import com.android.permission.views.FloatBallView;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -42,8 +46,17 @@ public class FloatWindowManager {
     private boolean isWindowDismiss = true;
     private WindowManager windowManager = null;
     private WindowManager.LayoutParams mParams = null;
-    private AVCallFloatView floatView = null;
+    private FloatBallView floatView = null;
     private Dialog dialog;
+    private boolean isBottomBarDismiss = true;
+    private WindowManager.LayoutParams bottomBarParams;
+    private BottomBarView bottomBar;
+    private boolean isFloatChangeIcon = false;
+    private Context mContext;
+    private int mCloseCenterX = -1;
+    private int mCloseCenterY = -1;
+    private int mFloatBallRadiu;
+    private int mCloseBallRadiu;
 
     public static FloatWindowManager getInstance() {
         if (instance == null) {
@@ -55,6 +68,34 @@ public class FloatWindowManager {
         }
         return instance;
     }
+
+    private FloatBallView.FloatBallListener listener = new FloatBallView.FloatBallListener() {
+        @Override
+        public void onFloatBallMoving(int x, int y) {
+            handleFloatBallIcon(true);
+            showBottomBar(mContext);
+            handleBottomBarBg(x,y);
+        }
+
+        @Override
+        public void onFloatBallStopMoving(int x, int y) {
+            handleFloatBallIcon(false);
+            dismissBottomBar();
+        }
+    };
+
+    private BottomBarView.BottomBarListener bottomBarListener = new BottomBarView.BottomBarListener() {
+        @Override
+        public void onCloseIconLayouted(int x, int y) {
+            if (mCloseCenterX == -1 || mCloseCenterY == -1){
+                int size = DensityUtils.dp2px(mContext,32);
+                mCloseCenterX = x + size;
+                mCloseCenterY = y + size;
+                mCloseBallRadiu = size / 2;
+                mFloatBallRadiu = DensityUtils.dp2px(mContext,48) / 2;
+            }
+        }
+    };
 
     public void applyOrShowFloatWindow(Context context) {
         if (checkPermission(context)) {
@@ -303,21 +344,51 @@ public class FloatWindowManager {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             mType = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
         } else {
-            mType = WindowManager.LayoutParams.TYPE_SYSTEM_ERROR;
+            mType = WindowManager.LayoutParams.TYPE_SYSTEM_ALERT;
         }
         mParams.type = mType;
         mParams.format = PixelFormat.RGBA_8888;
         mParams.gravity = Gravity.LEFT | Gravity.TOP;
-        mParams.x = screenWidth - dp2px(context, 100);
-        mParams.y = screenHeight - dp2px(context, 171);
+        mParams.x = screenWidth - DensityUtils.dp2px(context, 100);
+        mParams.y = screenHeight / 2;
 
 
-//        ImageView imageView = new ImageView(mContext);
-//        imageView.setImageResource(R.drawable.app_icon);
-        floatView = new AVCallFloatView(context);
+        floatView = new FloatBallView(context,listener);
         floatView.setParams(mParams);
         floatView.setIsShowing(true);
         windowManager.addView(floatView, mParams);
+    }
+
+    private void handleFloatBallIcon(boolean isMoving) {
+        ImageView ivBall = floatView.findViewById(R.id.iv_ball);
+        if (isMoving && !isFloatChangeIcon) {
+            isFloatChangeIcon = true;
+            ivBall.setImageResource(R.mipmap.ic_ball_launcher_press);
+        } else if (!isMoving) {
+            isFloatChangeIcon = false;
+            ivBall.setImageResource(R.mipmap.ic_ball_launcher_normal);
+        }
+    }
+
+    private void handleBottomBarBg(int x, int y){
+        if (bottomBar != null){
+            ImageView ivBg = bottomBar.findViewById(R.id.iv_bottom_bg);
+            int floatBallCenterX = x + mFloatBallRadiu;
+            int floatBallCenterY = y + mFloatBallRadiu;
+
+            if (mCloseCenterX != -1) {
+                double x2 = Math.pow((mCloseCenterX - floatBallCenterX),2);
+                double y2 = Math.pow((mCloseCenterY - floatBallCenterY),2);
+                double d = Math.sqrt((x2 + y2));
+                //悬浮球跟关闭按钮圆心距离
+                double distance = mFloatBallRadiu + mCloseBallRadiu;
+                if (d <= distance){
+                    ivBg.setImageResource(R.mipmap.bg_bottom_red);
+                }else {
+                    ivBg.setImageResource(R.mipmap.bg_bottom_gray);
+                }
+            }
+        }
     }
 
     public void dismissWindow() {
@@ -333,8 +404,61 @@ public class FloatWindowManager {
         }
     }
 
-    private int dp2px(Context context, float dp){
-        final float scale = context.getResources().getDisplayMetrics().density;
-        return (int) (dp * scale + 0.5f);
+    public void showBottomBar(Context context) {
+
+        if (!isBottomBarDismiss) {
+            return;
+        }
+        Log.e("handle","showBottom");
+        isBottomBarDismiss = false;
+        if (windowManager == null) {
+            windowManager =
+                    (WindowManager) context.getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
+        }
+
+        Point size = new Point();
+        windowManager.getDefaultDisplay().getSize(size);
+        int screenWidth = size.x;
+        int screenHeight = size.y;
+
+        bottomBarParams = new WindowManager.LayoutParams();
+        bottomBarParams.packageName = context.getPackageName();
+        bottomBarParams.width = WindowManager.LayoutParams.MATCH_PARENT;
+        bottomBarParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        bottomBarParams.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
+                | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+                | WindowManager.LayoutParams.FLAG_LAYOUT_INSET_DECOR
+                | WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            bottomBarParams.type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY - 1;
+        } else {
+            bottomBarParams.type = WindowManager.LayoutParams.TYPE_PHONE;
+        }
+        bottomBarParams.format = PixelFormat.RGBA_8888;
+        bottomBarParams.gravity = Gravity.LEFT | Gravity.TOP;
+        bottomBarParams.x = screenWidth;
+        bottomBarParams.y = screenHeight;
+
+        bottomBar = new BottomBarView(context, bottomBarListener);
+        windowManager.addView(bottomBar, bottomBarParams);
+
+
     }
+
+    public void dismissBottomBar() {
+        if (isBottomBarDismiss) {
+            Log.e(TAG, "window can not be dismiss cause it has not been added");
+            return;
+        }
+        isBottomBarDismiss = true;
+        if (windowManager != null && bottomBar != null) {
+            windowManager.removeViewImmediate(bottomBar);
+        }
+    }
+
+    public void setContext(Context mContext) {
+        this.mContext = mContext;
+    }
+
+
 }

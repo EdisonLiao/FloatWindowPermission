@@ -23,6 +23,7 @@ public class FloatWindowActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+        FloatWindowManager.getInstance().setContext(this);
         findViewById(R.id.btn_show_or_apply).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

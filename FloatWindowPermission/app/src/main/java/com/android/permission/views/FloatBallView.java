@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 2016 Facishare Technology Co., Ltd. All Rights Reserved.
  */
-package com.android.permission;
+package com.android.permission.views;
 
 import android.content.Context;
 import android.graphics.Point;
@@ -14,7 +14,6 @@ import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import com.android.floatwindowpermission.R;
 
@@ -24,7 +23,7 @@ import com.android.floatwindowpermission.R;
  * @author zhaozp
  * @since 2016-05-19
  */
-public class AVCallFloatView extends FrameLayout {
+public class FloatBallView extends FrameLayout {
     private static final String TAG = "AVCallFloatView";
 
     /**
@@ -60,10 +59,16 @@ public class AVCallFloatView extends FrameLayout {
     private boolean isShowing = false;
     private WindowManager windowManager = null;
     private WindowManager.LayoutParams mParams = null;
+    private FloatBallListener mListener;
 
+    public interface FloatBallListener{
+        void onFloatBallMoving(int x,int y);
+        void onFloatBallStopMoving(int x,int y);
+    }
 
-    public AVCallFloatView(Context context) {
+    public FloatBallView(Context context, FloatBallListener listener) {
         super(context);
+        mListener = listener;
         initView();
     }
 
@@ -103,15 +108,21 @@ public class AVCallFloatView extends FrameLayout {
                 yInScreen = event.getRawY();
                 // 手指移动的时候更新小悬浮窗的位置
                 updateViewPosition();
+                if (mListener != null){
+                    Log.e(TAG,"moveListener");
+                    mListener.onFloatBallMoving(mParams.x,mParams.y);
+                }
                 break;
             case MotionEvent.ACTION_UP:
                 if (Math.abs(xDownInScreen - xInScreen) <= ViewConfiguration.get(getContext()).getScaledTouchSlop()
                         && Math.abs(yDownInScreen - yInScreen) <= ViewConfiguration.get(getContext()).getScaledTouchSlop()) {
                     // 点击效果
-                    Toast.makeText(getContext(), "this float window is clicked", Toast.LENGTH_SHORT).show();
                 } else {
                     //吸附效果
                     anchorToSide();
+                    if (mListener != null){
+                        mListener.onFloatBallStopMoving(mParams.x,mParams.y);
+                    }
                 }
                 break;
             default:
@@ -198,7 +209,7 @@ public class AVCallFloatView extends FrameLayout {
                 if (mParams.x != (startX + xDistance) || mParams.y != (startY + yDistance)) {
                     mParams.x = startX + xDistance;
                     mParams.y = startY + yDistance;
-                    windowManager.updateViewLayout(AVCallFloatView.this, mParams);
+                    windowManager.updateViewLayout(FloatBallView.this, mParams);
                 }
                 isAnchoring = false;
                 return;
@@ -212,8 +223,8 @@ public class AVCallFloatView extends FrameLayout {
             if (!isShowing) {
                 return;
             }
-            windowManager.updateViewLayout(AVCallFloatView.this, mParams);
-            AVCallFloatView.this.postDelayed(this, 16);
+            windowManager.updateViewLayout(FloatBallView.this, mParams);
+            FloatBallView.this.postDelayed(this, 16);
         }
     }
 

@@ -3,4 +3,11 @@
   -->
 <resources>
     <string name="app_name">悬浮窗适配</string>
+
+    <string name="drag_remove">Drag here to remove</string>
+    <string name="messenger">Messenger</string>
+    <string name="emoji">Emoji</string>
+    <string name="quick_response">Quick Response</string>
+    <string name="back_to_messenger">Back to Messenger</string>
+
 </resources>

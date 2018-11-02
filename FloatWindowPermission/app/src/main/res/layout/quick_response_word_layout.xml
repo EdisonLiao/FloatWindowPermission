@@ -54,7 +54,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingTop="15dp"
-                    android:paddingBottom="15dp"
+                    android:paddingBottom="10dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
@@ -63,7 +63,16 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="@null"/>
+                        android:textCursorDrawable="@drawable/cusor"
+                        android:background="@null"
+                        android:hint="@string/quick_response_hint"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:maxEms="5"
+                        android:singleLine="true"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/quick_hint_color"
+                        android:textSize="16sp"/>
 
                     <ImageView
                         android:id="@+id/iv_add"

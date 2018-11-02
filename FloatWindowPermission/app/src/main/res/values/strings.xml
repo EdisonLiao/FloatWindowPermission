@@ -58,4 +58,7 @@
         <item>@string/response_9</item>
     </array>
 
+    <string name="quick_response_hint">Create your quick response</string>
+    <string name="copy_success">Copy Succeed!</string>
+
 </resources>

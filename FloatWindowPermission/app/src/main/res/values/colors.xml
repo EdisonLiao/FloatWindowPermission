@@ -11,5 +11,7 @@
     <color name="gray_line">#cccccc</color>
     <color name="word_bg_border">#979797</color>
     <color name="trans_color">#00ffffff</color>
+    <color name="cursor_color">#28b4ff</color>
+    <color name="quick_hint_color">#80ffffff</color>
 
 </resources>

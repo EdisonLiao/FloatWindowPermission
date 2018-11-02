@@ -17,6 +17,15 @@ import java.util.List;
 public class QuickResponseAdapter extends RecyclerView.Adapter<QuickResponseAdapter.QuickVH>{
 
     private List<String> dataList = new ArrayList<>();
+    private QuickWorkListener mListener;
+
+    public interface QuickWorkListener{
+        void onWorkClicked(int pos,String word);
+    }
+
+    public QuickResponseAdapter(QuickWorkListener listener){
+        mListener = listener;
+    }
 
     @Override
     public QuickVH onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -25,8 +34,16 @@ public class QuickResponseAdapter extends RecyclerView.Adapter<QuickResponseAdap
     }
 
     @Override
-    public void onBindViewHolder(QuickVH holder, int position) {
+    public void onBindViewHolder(QuickVH holder, final int position) {
         holder.tvWord.setText(dataList.get(position));
+        holder.tvWord.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mListener != null){
+                    mListener.onWorkClicked(position,dataList.get(position));
+                }
+            }
+        });
     }
 
     @Override

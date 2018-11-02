@@ -3,35 +3,20 @@
  */
 package com.android.permission;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.graphics.Point;
-import android.net.Uri;
 import android.os.Build;
-import android.provider.Settings;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.android.floatwindowpermission.R;
-import com.android.permission.rom.HuaweiUtils;
-import com.android.permission.rom.MeizuUtils;
-import com.android.permission.rom.MiuiUtils;
-import com.android.permission.rom.OppoUtils;
-import com.android.permission.rom.QikuUtils;
-import com.android.permission.rom.RomUtils;
 import com.android.permission.views.BottomBarView;
 import com.android.permission.views.FloatBallView;
 import com.android.permission.views.QuickResponseView;
 import com.android.permission.views.QuickResponseWorkView;
-
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 
 /**
  * Description:

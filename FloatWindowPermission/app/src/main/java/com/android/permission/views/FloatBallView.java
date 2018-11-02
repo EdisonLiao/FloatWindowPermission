@@ -16,6 +16,7 @@ import android.view.animation.Interpolator;
 import android.widget.FrameLayout;
 
 import com.android.floatwindowpermission.R;
+import com.android.permission.DensityUtils;
 
 /**
  * Description:
@@ -23,7 +24,7 @@ import com.android.floatwindowpermission.R;
  * @author zhaozp
  * @since 2016-05-19
  */
-public class FloatBallView extends FrameLayout {
+public class FloatBallView extends FrameLayout{
     private static final String TAG = "AVCallFloatView";
 
     /**
@@ -64,6 +65,7 @@ public class FloatBallView extends FrameLayout {
     public interface FloatBallListener{
         void onFloatBallMoving(int x,int y);
         void onFloatBallStopMoving(int x,int y);
+        void onFloatBallClicked();
     }
 
     public FloatBallView(Context context, FloatBallListener listener) {
@@ -76,7 +78,6 @@ public class FloatBallView extends FrameLayout {
         windowManager = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
         LayoutInflater inflater = LayoutInflater.from(getContext());
         View floatView = inflater.inflate(R.layout.float_window_layout, null);
-
         addView(floatView);
 
     }
@@ -106,10 +107,12 @@ public class FloatBallView extends FrameLayout {
             case MotionEvent.ACTION_MOVE:
                 xInScreen = event.getRawX();
                 yInScreen = event.getRawY();
-                // 手指移动的时候更新小悬浮窗的位置
-                updateViewPosition();
-                if (mListener != null){
-                    Log.e(TAG,"moveListener");
+                boolean realMoving = Math.abs(xInScreen - xDownInScreen) >= ViewConfiguration.get(getContext()).getScaledTouchSlop()
+                        && Math.abs(yInScreen - yDownInScreen) >= ViewConfiguration.get(getContext()).getScaledTouchSlop();
+
+                if (mListener != null && realMoving){
+                    // 手指移动的时候更新小悬浮窗的位置
+                    updateViewPosition();
                     mListener.onFloatBallMoving(mParams.x,mParams.y);
                 }
                 break;
@@ -117,6 +120,10 @@ public class FloatBallView extends FrameLayout {
                 if (Math.abs(xDownInScreen - xInScreen) <= ViewConfiguration.get(getContext()).getScaledTouchSlop()
                         && Math.abs(yDownInScreen - yInScreen) <= ViewConfiguration.get(getContext()).getScaledTouchSlop()) {
                     // 点击效果
+                    if (mListener != null){
+                        mListener.onFloatBallClicked();
+                    }
+
                 } else {
                     //吸附效果
                     anchorToSide();
@@ -144,7 +151,7 @@ public class FloatBallView extends FrameLayout {
         int xDistance = 0;
         int yDistance = 0;
 
-        int dp_25 = dp2px(15);
+        int dp_25 = DensityUtils.dp2px(getContext(),15);
 
         //1
         if (middleX <= dp_25 + getWidth() / 2) {
@@ -176,11 +183,6 @@ public class FloatBallView extends FrameLayout {
         animTime = Math.abs(xDistance) > Math.abs(yDistance) ? (int) (((float) xDistance / (float) screenWidth) * 600f)
                 : (int) (((float) yDistance / (float) screenHeight) * 900f);
         this.post(new AnchorAnimRunnable(Math.abs(animTime), xDistance, yDistance, System.currentTimeMillis()));
-    }
-
-    public int dp2px(float dp){
-        final float scale = getContext().getResources().getDisplayMetrics().density;
-        return (int) (dp * scale + 0.5f);
     }
 
     private class AnchorAnimRunnable implements Runnable {

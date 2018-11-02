@@ -10,4 +10,52 @@
     <string name="quick_response">Quick Response</string>
     <string name="back_to_messenger">Back to Messenger</string>
 
+    <string name="emoji_0">(*^▽^*)</string>
+    <string name="emoji_1">(*^▽^*)</string>
+    <string name="emoji_2">(*^▽^*)</string>
+    <string name="emoji_3">(*^▽^*)</string>
+    <string name="emoji_4">(*^▽^*)</string>
+    <string name="emoji_5">(*^▽^*)</string>
+    <string name="emoji_6">(*^▽^*)</string>
+    <string name="emoji_7">(*^▽^*)</string>
+    <string name="emoji_8">(*^▽^*)</string>
+    <string name="emoji_9">(*^▽^*)</string>
+
+    <array name="emoji_array">
+    <item>@string/emoji_0</item>
+    <item>@string/emoji_1</item>
+    <item>@string/emoji_2</item>
+    <item>@string/emoji_3</item>
+    <item>@string/emoji_4</item>
+    <item>@string/emoji_5</item>
+    <item>@string/emoji_6</item>
+    <item>@string/emoji_7</item>
+    <item>@string/emoji_8</item>
+    <item>@string/emoji_9</item>
+    </array>
+
+    <string name="response_0">Thanks!</string>
+    <string name="response_1">Thanks you!</string>
+    <string name="response_2">How smart you are!</string>
+    <string name="response_3">So hot!</string>
+    <string name="response_4">Meeting!</string>
+    <string name="response_5">How old are you man?</string>
+    <string name="response_6">双击老铁666</string>
+    <string name="response_7">OMG!</string>
+    <string name="response_8">Oh my God</string>
+    <string name="response_9">I am fine</string>
+
+    <array name="response_array">
+        <item>@string/response_0</item>
+        <item>@string/response_1</item>
+        <item>@string/response_2</item>
+        <item>@string/response_3</item>
+        <item>@string/response_4</item>
+        <item>@string/response_5</item>
+        <item>@string/response_6</item>
+        <item>@string/response_7</item>
+        <item>@string/response_8</item>
+        <item>@string/response_9</item>
+    </array>
+
 </resources>

@@ -9,5 +9,7 @@
     <color name="quick_response_bg_color">#383c4b</color>
     <color name="quick_response_deep_black">#2d303d</color>
     <color name="gray_line">#cccccc</color>
+    <color name="word_bg_border">#979797</color>
+    <color name="trans_color">#00ffffff</color>
 
 </resources>

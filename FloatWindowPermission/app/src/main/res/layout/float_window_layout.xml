@@ -2,16 +2,23 @@
 <!--
   ~ Copyright (C) 2016 Facishare Technology Co., Ltd. All Rights Reserved.
   -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:id="@+id/ll_content"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content">
+              android:layout_width="48dp"
+              android:layout_height="48dp">
 
-    <Button
-        android:id="@+id/iv_ball"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:background="@drawable/bg_float_ball"/>
+    <ImageView
+        android:id="@+id/iv_ball_normal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@mipmap/ic_ball_launcher_normal"/>
 
-</LinearLayout>
+    <ImageView
+        android:id="@+id/iv_ball_press"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible"
+        android:src="@mipmap/ic_ball_launcher_press"/>
+
+</FrameLayout>

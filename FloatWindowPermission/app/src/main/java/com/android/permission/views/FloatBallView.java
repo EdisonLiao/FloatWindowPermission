@@ -151,37 +151,29 @@ public class FloatBallView extends FrameLayout{
         int xDistance = 0;
         int yDistance = 0;
 
-        int dp_25 = DensityUtils.dp2px(getContext(),15);
+        int dp_25 = 0;
 
         //1
         if (middleX <= dp_25 + getWidth() / 2) {
             xDistance = dp_25 - mParams.x;
-        }
-        //2
-        else if (middleX <= screenWidth / 2) {
+        } else if (middleX <= screenWidth / 2) {
             xDistance = dp_25 - mParams.x;
-        }
-        //3
-        else if (middleX >= screenWidth - getWidth() / 2 - dp_25) {
+        } else if (middleX >= screenWidth - getWidth() / 2 - dp_25) {
             xDistance = screenWidth - mParams.x - getWidth() - dp_25;
-        }
-        //4
-        else {
+        } else {
             xDistance = screenWidth - mParams.x - getWidth() - dp_25;
         }
 
         //1
         if (mParams.y < dp_25) {
             yDistance = dp_25 - mParams.y;
-        }
-        //2
-        else if (mParams.y + getHeight() + dp_25 >= screenHeight) {
+        } else if (mParams.y + getHeight() + dp_25 >= screenHeight) {
             yDistance = screenHeight - dp_25 - mParams.y - getHeight();
         }
         Log.e(TAG, "xDistance  " + xDistance + "   yDistance" + yDistance);
 
-        animTime = Math.abs(xDistance) > Math.abs(yDistance) ? (int) (((float) xDistance / (float) screenWidth) * 600f)
-                : (int) (((float) yDistance / (float) screenHeight) * 900f);
+        animTime = Math.abs(xDistance) > Math.abs(yDistance) ? (int) (((float) xDistance / (float) screenWidth) * 300f)
+                : (int) (((float) yDistance / (float) screenHeight) * 600f);
         this.post(new AnchorAnimRunnable(Math.abs(animTime), xDistance, yDistance, System.currentTimeMillis()));
     }
 

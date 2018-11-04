@@ -9,6 +9,7 @@ import android.graphics.Point;
 import android.os.Build;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
@@ -195,7 +196,7 @@ public class FloatWindowManager {
         mParams.type = mType;
         mParams.format = PixelFormat.RGBA_8888;
         mParams.gravity = Gravity.LEFT | Gravity.TOP;
-        mParams.x = screenWidth - DensityUtils.dp2px(context, 100);
+        mParams.x = screenWidth;
         mParams.y = screenHeight / 2;
 
 
@@ -207,14 +208,18 @@ public class FloatWindowManager {
     }
 
     private void handleFloatBallIcon(boolean isMoving) {
-//        ImageView ivBall = floatView.findViewById(R.id.iv_ball);
-//        if (isMoving && !isFloatChangeIcon) {
-//            isFloatChangeIcon = true;
-//            ivBall.setImageResource(R.mipmap.ic_ball_launcher_press);
-//        } else if (!isMoving) {
-//            isFloatChangeIcon = false;
-//            ivBall.setImageResource(R.mipmap.ic_ball_launcher_normal);
-//        }
+        ImageView ivBallNormal = floatView.findViewById(R.id.iv_ball_normal);
+        ImageView ivBallPress = floatView.findViewById(R.id.iv_ball_press);
+        if (isMoving && !isFloatChangeIcon) {
+            isFloatChangeIcon = true;
+            ivBallNormal.setVisibility(View.INVISIBLE);
+            ivBallPress.setVisibility(View.VISIBLE);
+
+        } else if (!isMoving) {
+            isFloatChangeIcon = false;
+            ivBallNormal.setVisibility(View.VISIBLE);
+            ivBallPress.setVisibility(View.INVISIBLE);
+        }
     }
 
     private void handleBottomBarBg(int x, int y){

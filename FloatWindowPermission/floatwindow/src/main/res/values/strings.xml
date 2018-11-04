@@ -1,0 +1,146 @@
+<resources>
+    <string name="app_name">Messenger</string>
+    <string name="messenger_for_social">Messenger for Social App</string>
+    <string name="splash_name">Your all in one messenger app here</string>
+    <string name="my_app">My app</string>
+    <string name="game">Game</string>
+    <string name="quick_visit">Quick visit</string>
+    <string name="report">Report</string>
+    <string name="web_name">Facebook</string>
+    <string name="fb_app_id">2047054298904086</string>
+
+    <string name="add_app">Add app</string>
+    <string name="clear_data">Clear Data</string>
+    <string name="share">Share</string>
+    <string name="feedback">Feedback</string>
+    <string name="setting">Setting</string>
+    <string name="notif">Notification</string>
+    <string name="send_data">Send Personal Data</string>
+    <string name="erase_data">Erase Personal Data</string>
+    <string name="privacy">Privacy</string>
+    <string name="EULA">EULA</string>
+
+    <string name="popup">You can add it to bookmarks for faster access.</string>
+    <string name="app">App</string>
+    <string name="last_open">Last opened</string>
+    <string name="times">Times</string>
+
+    <string name="jump_message">Openning %1$s times</string>
+    <string name="all">All</string>
+    <string name="book_marks">Bookmarks</string>
+    <string name="done">Done</string>
+    <string name="search_app_to_add">Search app to add</string>
+    <string name="hi_firend">Hi, Friend</string>
+    <string name="no_app_term">There are no apps here, please add your frequently used apps.</string>
+    <string name="add_first_app">Add your first app</string>
+    <string name="remove_from_bookmarks">Do you want to remove it from bookmarks?</string>
+    <string name="later">Later</string>
+    <string name="sure">Sure</string>
+    <string name="week">Week</string>
+    <string name="month">Month</string>
+    <string name="mon">Mon</string>
+    <string name="tue">Tue</string>
+    <string name="wed">Wed</string>
+    <string name="thu">Thu</string>
+    <string name="fri">Fri</string>
+    <string name="sat">Sat</string>
+    <string name="sun">Sun</string>
+    <string name="others">others</string>
+    <string name="share_friends">Share to friends</string>
+    <string name="no_data_yet">No data yet~</string>
+    <string name="exit_app_press_two">Press back again to quit</string>
+    <string name="social_media">SocialMedia</string>
+    <string name="shopping">Shopping</string>
+    <string name="email">Email</string>
+    <string name="clear_app_data">Do you want to clean app data?</string>
+    <string name="tips">Tips</string>
+    <string name="ok">OK</string>
+    <string name="cancel">CANCEL</string>
+    <string name="success">Success!</string>
+    <string name="drawer_share_term">OMG! Really love this app which can have all social media in one place and open your apps with one click</string>
+    <string name="report_share_term">OMG! Look at how many times do you open your apps</string>
+    <string name="tips_feedback_email">Not satisfied with Messenger? Plz feel free to tell us:</string>
+    <string name="quick_end">- End -</string>
+    <string name="search_no_data">Oops! No results found for your search.</string>
+    <string name="add_to_bookmark">Add to bookmarks</string>
+    <string name="remove_from_mark">Remove form bookmarks</string>
+    <string name="add_to_app">Click "Done" to add the selected items</string>
+    <string name="ad_exit_app">EXITING…</string>
+    <string name="my_app_guide">Quick open all your favourite apps with just one click.</string>
+    <string name="quick_visit_guide">Access to more popular social apps in webview with no-installation required.</string>
+    <string name="all_games">All Games</string>
+    <string name="hint_guide_add_app">Now you can add your own apps as you like.</string>
+    <string name="txt_guide_add_app">Try it now</string>
+
+    <string name="remove">Remove</string>
+    <string name="remove_tips">Do you want to remove it from My app? (Still available on your phone)</string>
+    <string name="recommend_hit">Recommended for You</string>
+
+    <string name="drag_remove">Drag here to remove</string>
+    <string name="messenger">Messenger</string>
+    <string name="emoji">Emoji</string>
+    <string name="quick_response">Quick Response</string>
+    <string name="back_to_messenger">Back to Messenger</string>
+
+    <string name="emoji_0">(*^▽^*)</string>
+    <string name="emoji_1">(*^▽^*)</string>
+    <string name="emoji_2">(*^▽^*)</string>
+    <string name="emoji_3">(*^▽^*)</string>
+    <string name="emoji_4">(*^▽^*)</string>
+    <string name="emoji_5">(*^▽^*)</string>
+    <string name="emoji_6">(*^▽^*)</string>
+    <string name="emoji_7">(*^▽^*)</string>
+    <string name="emoji_8">(*^▽^*)</string>
+    <string name="emoji_9">(*^▽^*)</string>
+
+    <array name="emoji_array">
+        <item>@string/emoji_0</item>
+        <item>@string/emoji_1</item>
+        <item>@string/emoji_2</item>
+        <item>@string/emoji_3</item>
+        <item>@string/emoji_4</item>
+        <item>@string/emoji_5</item>
+        <item>@string/emoji_6</item>
+        <item>@string/emoji_7</item>
+        <item>@string/emoji_8</item>
+        <item>@string/emoji_9</item>
+    </array>
+
+    <string name="response_0">Received, thank you.</string>
+    <string name="response_1">Thanks a lot.</string>
+    <string name="response_2">Got it, thanks!</string>
+    <string name="response_3">Done.</string>
+    <string name="response_4">No, I don\'t.</string>
+    <string name="response_5">Hope to see you soon.</string>
+    <string name="response_6">Oh my god！</string>
+    <string name="response_7">No, I do not.</string>
+    <string name="response_8">Yes, I do.</string>
+    <string name="response_9">Yes, I have one.</string>
+    <string name="response_10">Thank you for your response.</string>
+    <string name="response_11">Thank you for your message.</string>
+    <string name="response_12">OK, I  will check.</string>
+    <string name="response_13">It\'s working!</string>
+    <string name="response_14">No, it\'s not.</string>
+    <string name="response_15">Thanks, I\'ll check it out.</string>
+    <string name="response_16">Sorry, I can\'t help you.</string>
+    <string name="response_17">Yes, you can do that.</string>
+
+
+
+    <array name="response_array">
+        <item>@string/response_0</item>
+        <item>@string/response_1</item>
+        <item>@string/response_2</item>
+        <item>@string/response_3</item>
+        <item>@string/response_4</item>
+        <item>@string/response_5</item>
+        <item>@string/response_6</item>
+        <item>@string/response_7</item>
+        <item>@string/response_8</item>
+        <item>@string/response_9</item>
+    </array>
+
+    <string name="quick_response_hint">Create your quick response</string>
+    <string name="copy_success">Copy Succeed!</string>
+
+</resources>

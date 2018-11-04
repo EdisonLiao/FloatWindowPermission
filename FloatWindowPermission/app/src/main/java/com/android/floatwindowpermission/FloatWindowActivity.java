@@ -7,8 +7,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 
-import com.android.permission.FloatWindowManager;
-import com.android.permission.IUsageRecord;
+import com.example.floatwindow.permission.FloatWindowManager;
+import com.example.floatwindow.permission.IUsageRecord;
 
 /**
  * Description:

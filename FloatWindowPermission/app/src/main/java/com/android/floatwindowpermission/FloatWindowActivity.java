@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.android.permission.FloatWindowManager;
+import com.android.permission.IUsageRecord;
 
 /**
  * Description:
@@ -24,6 +25,17 @@ public class FloatWindowActivity extends Activity {
 
         setContentView(R.layout.activity_main);
         FloatWindowManager.getInstance().setContext(this);
+        FloatWindowManager.getInstance().setUsageRecord(new IUsageRecord() {
+            @Override
+            public void pv(String record) {
+                
+            }
+
+            @Override
+            public void pv(String record, String value) {
+
+            }
+        });
         findViewById(R.id.btn_show_or_apply).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

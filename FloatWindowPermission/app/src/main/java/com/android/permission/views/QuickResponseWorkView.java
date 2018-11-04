@@ -7,8 +7,6 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -17,10 +15,13 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.floatwindowpermission.R;
-import com.android.permission.adapters.QuickResponseAdapter;
+import com.android.permission.IUsageRecord;
+import com.android.permission.SharePreMgr;
+import com.google.android.flexbox.FlexboxLayout;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,21 +30,21 @@ import java.util.List;
 /**
  * created by edison 2018/11/1
  */
-public class QuickResponseWorkView extends FrameLayout implements QuickResponseAdapter.QuickWorkListener{
+public class QuickResponseWorkView extends FrameLayout implements View.OnClickListener{
 
     private QuickWorkViewListener mListener;
+    private FlexboxLayout mFlexLayout;
     private boolean mIsEmoji = false;
-    private RecyclerView mRv;
-    private QuickResponseAdapter mAdapter;
     private EditText et;
+    private LayoutInflater mInflater;
+    private static final String WORD_DIVIDER = "<";
+    private IUsageRecord mUsageRecord;
 
     @Override
-    public void onWorkClicked(int pos, String word) {
-        Toast.makeText(getContext(),getResources().getString(R.string.copy_success),Toast.LENGTH_LONG).show();
-        ClipboardManager cm = (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
-        ClipData mClipData = ClipData.newPlainText("Messenger", word);
-        if (cm != null) {
-            cm.setPrimaryClip(mClipData);
+    public void onClick(View view) {
+        if (view.getId() == R.id.tv_word){
+            String word = (String) view.getTag();
+            onWorkClick(word);
         }
     }
 
@@ -51,10 +52,11 @@ public class QuickResponseWorkView extends FrameLayout implements QuickResponseA
         void onWorkClose();
     }
 
-    public QuickResponseWorkView(@NonNull Context context, QuickWorkViewListener listener, boolean isEmoji) {
+    public QuickResponseWorkView(@NonNull Context context, QuickWorkViewListener listener, boolean isEmoji, IUsageRecord record) {
         super(context);
         mIsEmoji = isEmoji;
         mListener = listener;
+        mUsageRecord = record;
         initView();
     }
 
@@ -75,9 +77,9 @@ public class QuickResponseWorkView extends FrameLayout implements QuickResponseA
     }
 
     private void initView(){
-        LayoutInflater inflater = LayoutInflater.from(getContext());
-        View root = inflater.inflate(R.layout.quick_response_word_layout, null);
-        mRv = root.findViewById(R.id.rv_word);
+        mInflater = LayoutInflater.from(getContext());
+        View root = mInflater.inflate(R.layout.quick_response_word_layout, null);
+        mFlexLayout = root.findViewById(R.id.flex_layout);
         root.findViewById(R.id.iv_back).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -97,7 +99,7 @@ public class QuickResponseWorkView extends FrameLayout implements QuickResponseA
         });
 
         addView(root);
-        initRv();
+        initFlexLayout();
 
         if (!mIsEmoji){
             root.findViewById(R.id.fl_edit).setVisibility(VISIBLE);
@@ -116,12 +118,14 @@ public class QuickResponseWorkView extends FrameLayout implements QuickResponseA
                 @Override
                 public void onClick(View view) {
                     String word = et.getText().toString();
-                    if (!TextUtils.isEmpty(word.trim()) && mAdapter != null){
-                        mAdapter.addLast(word);
+                    if (!TextUtils.isEmpty(word.trim()) && mFlexLayout != null){
+                        mFlexLayout.addView(addWord(word.trim()));
                         ivAdd.setImageResource(R.mipmap.ic_add);
                         et.setCursorVisible(false);
                         et.setText("");
                         hideKeyBoard();
+                        saveWord(word.trim());
+                        mUsageRecord.pv(IUsageRecord.FLOATBALL_RESPONSE_ADD);
                     }
                 }
             });
@@ -129,7 +133,7 @@ public class QuickResponseWorkView extends FrameLayout implements QuickResponseA
         }
     }
 
-    private void initRv(){
+    private void initFlexLayout(){
         List<String> wordList = new ArrayList<>();
         if (mIsEmoji){
             String[] list = getContext().getResources().getStringArray(R.array.emoji_array);
@@ -139,11 +143,47 @@ public class QuickResponseWorkView extends FrameLayout implements QuickResponseA
             wordList.addAll(Arrays.asList(list));
         }
 
-        mAdapter = new QuickResponseAdapter(this);
-        mRv.setLayoutManager(new GridLayoutManager(getContext(),3));
-        mRv.setHasFixedSize(true);
-        mRv.setAdapter(mAdapter);
-        mAdapter.addAll(wordList);
+        String addedWord = SharePreMgr.getAddedQuickWork();
+        if (!TextUtils.isEmpty(addedWord)){
+            String[] addWords = addedWord.split(WORD_DIVIDER);
+            wordList.addAll(Arrays.asList(addWords));
+        }
+
+        for (String word: wordList){
+            mFlexLayout.addView(addWord(word));
+        }
+
+    }
+
+    private View addWord(String word){
+        View contentView = mInflater.inflate(R.layout.item_word,null);
+        TextView tvWord = contentView.findViewById(R.id.tv_word);
+        tvWord.setTag(word);
+        tvWord.setText(word);
+        tvWord.setOnClickListener(this);
+        return contentView;
+    }
+
+    private void saveWord(String addWord) {
+        if (!TextUtils.isEmpty(addWord)) {
+            String words = SharePreMgr.getAddedQuickWork();
+            if (TextUtils.isEmpty(words)){
+                words = addWord + WORD_DIVIDER;
+            }else {
+                words = words + addWord + WORD_DIVIDER;
+            }
+
+            SharePreMgr.addQuickWork(words);
+        }
+    }
+
+    private void onWorkClick(String word){
+        Toast.makeText(getContext(),getResources().getString(R.string.copy_success),Toast.LENGTH_LONG).show();
+        ClipboardManager cm = (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData mClipData = ClipData.newPlainText("Messenger", word);
+        if (cm != null) {
+            cm.setPrimaryClip(mClipData);
+        }
     }
 
     private void hideKeyBoard(){

@@ -40,6 +40,7 @@ public class FloatWindowManager {
     private QuickResponseWorkView quickWordView;
     private IFloatWindowCallback mCallback;
     private PermissionMgr mPermissionMgr;
+    private IUsageRecord mUsageRecord;
     private boolean isFloatChangeIcon = false;
     private Context mContext;
     private int mBottomCloseCenterX = -1;
@@ -77,6 +78,7 @@ public class FloatWindowManager {
             dismissBottomBar();
             if (isBottomBarRed){
                 dismissWindow();
+                mUsageRecord.pv(IUsageRecord.FLOATBALL_CLOSE);
             }
         }
 
@@ -84,6 +86,7 @@ public class FloatWindowManager {
         public void onFloatBallClicked() {
             dismissWindow();
             showQuickResponse();
+            mUsageRecord.pv(IUsageRecord.FLOATBALL_CLICK);
         }
     };
 
@@ -105,12 +108,14 @@ public class FloatWindowManager {
         public void onEmojiClick() {
             dismissQuickResponse();
             showQuickWord(true);
+            mUsageRecord.pv(IUsageRecord.FLOATBALL_EMOJI);
         }
 
         @Override
         public void onQuickClick() {
             dismissQuickResponse();
             showQuickWord(false);
+            mUsageRecord.pv(IUsageRecord.FLOATBALL_RESPONSE);
         }
 
         @Override
@@ -123,6 +128,7 @@ public class FloatWindowManager {
         public void onBackMessengerClick() {
             if (mCallback != null){
                 mCallback.backToMessenger();
+                mUsageRecord.pv(IUsageRecord.FLOATBALL_BACK_CLICK);
             }
         }
     };
@@ -197,17 +203,18 @@ public class FloatWindowManager {
         floatView.setParams(mParams);
         floatView.setIsShowing(true);
         windowManager.addView(floatView, mParams);
+        mUsageRecord.pv(IUsageRecord.FLOATBALL_SHOW);
     }
 
     private void handleFloatBallIcon(boolean isMoving) {
-        ImageView ivBall = floatView.findViewById(R.id.iv_ball);
-        if (isMoving && !isFloatChangeIcon) {
-            isFloatChangeIcon = true;
-            ivBall.setImageResource(R.mipmap.ic_ball_launcher_press);
-        } else if (!isMoving) {
-            isFloatChangeIcon = false;
-            ivBall.setImageResource(R.mipmap.ic_ball_launcher_normal);
-        }
+//        ImageView ivBall = floatView.findViewById(R.id.iv_ball);
+//        if (isMoving && !isFloatChangeIcon) {
+//            isFloatChangeIcon = true;
+//            ivBall.setImageResource(R.mipmap.ic_ball_launcher_press);
+//        } else if (!isMoving) {
+//            isFloatChangeIcon = false;
+//            ivBall.setImageResource(R.mipmap.ic_ball_launcher_normal);
+//        }
     }
 
     private void handleBottomBarBg(int x, int y){
@@ -331,7 +338,7 @@ public class FloatWindowManager {
         quickWordParmas.format = PixelFormat.RGBA_8888;
         quickWordParmas.gravity = Gravity. CENTER;
 
-        quickWordView = new QuickResponseWorkView(mContext,quickWorkListener,isEmoji);
+        quickWordView = new QuickResponseWorkView(mContext,quickWorkListener,isEmoji,mUsageRecord);
         windowManager.addView(quickWordView, quickWordParmas);
     }
 
@@ -360,6 +367,11 @@ public class FloatWindowManager {
 
     public void setContext(Context mContext) {
         this.mContext = mContext;
+        PreferenceMgr.getIns().init(mContext);
+    }
+
+    public void setUsageRecord(IUsageRecord mUsageRecord) {
+        this.mUsageRecord = mUsageRecord;
     }
 
     public void setCallback(IFloatWindowCallback mCallback) {

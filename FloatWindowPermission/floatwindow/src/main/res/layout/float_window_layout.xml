@@ -14,11 +14,4 @@
         android:layout_height="match_parent"
         android:src="@mipmap/ic_ball_launcher_normal"/>
 
-    <ImageView
-        android:id="@+id/iv_ball_press"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="invisible"
-        android:src="@mipmap/ic_ball_launcher_press"/>
-
 </FrameLayout>

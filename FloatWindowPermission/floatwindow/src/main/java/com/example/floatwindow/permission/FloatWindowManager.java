@@ -9,7 +9,6 @@ import android.graphics.Point;
 import android.os.Build;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
@@ -43,7 +42,6 @@ public class FloatWindowManager {
     private IFloatWindowCallback mCallback;
     private PermissionMgr mPermissionMgr;
     private IUsageRecord mUsageRecord;
-    private boolean isFloatChangeIcon = false;
     private Context mContext;
     private int mBottomCloseCenterX = -1;
     private int mBottomCloseCenterY = -1;
@@ -69,14 +67,12 @@ public class FloatWindowManager {
     private FloatBallView.FloatBallListener listener = new FloatBallView.FloatBallListener() {
         @Override
         public void onFloatBallMoving(int x, int y) {
-            handleFloatBallIcon(true);
             showBottomBar(mContext);
             handleBottomBarBg(x,y);
         }
 
         @Override
         public void onFloatBallStopMoving(int x, int y) {
-            handleFloatBallIcon(false);
             dismissBottomBar();
             if (isBottomBarRed){
                 dismissWindow();
@@ -96,7 +92,7 @@ public class FloatWindowManager {
         @Override
         public void onCloseIconLayouted(int x, int y) {
             if (mBottomCloseCenterX == -1 || mBottomCloseCenterY == -1){
-                int size = DensityUtils.dp2px(mContext,32);
+                int size = DensityUtils.dp2px(mContext,32) /2;
                 mBottomCloseCenterX = x + size;
                 mBottomCloseCenterY = y + size;
                 mCloseBallRadiu = size / 2;
@@ -131,6 +127,8 @@ public class FloatWindowManager {
             if (mCallback != null){
                 mCallback.backToMessenger();
                 mUsageRecord.pv(IUsageRecord.FLOATBALL_BACK_CLICK);
+                dismissQuickResponse();
+                showWindow(mContext);
             }
         }
     };
@@ -139,7 +137,7 @@ public class FloatWindowManager {
         @Override
         public void onWorkClose() {
             dismissQuickWork();
-            showQuickResponse();
+            showWindow(mContext);
         }
     };
 
@@ -210,21 +208,6 @@ public class FloatWindowManager {
         floatView.setIsShowing(true);
         windowManager.addView(floatView, mParams);
         mUsageRecord.pv(IUsageRecord.FLOATBALL_SHOW);
-    }
-
-    private void handleFloatBallIcon(boolean isMoving) {
-        ImageView ivBallNormal = floatView.findViewById(R.id.iv_ball_normal);
-        ImageView ivBallPress = floatView.findViewById(R.id.iv_ball_press);
-        if (isMoving && !isFloatChangeIcon) {
-            isFloatChangeIcon = true;
-            ivBallNormal.setVisibility(View.INVISIBLE);
-            ivBallPress.setVisibility(View.VISIBLE);
-
-        } else if (!isMoving) {
-            isFloatChangeIcon = false;
-            ivBallNormal.setVisibility(View.VISIBLE);
-            ivBallPress.setVisibility(View.INVISIBLE);
-        }
     }
 
     private void handleBottomBarBg(int x, int y){
@@ -312,9 +295,7 @@ public class FloatWindowManager {
         quickResponseParams.packageName = mContext.getPackageName();
         quickResponseParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
         quickResponseParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        quickResponseParams.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
-                | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
-                | WindowManager.LayoutParams.FLAG_LAYOUT_INSET_DECOR
+        quickResponseParams.flags = WindowManager.LayoutParams.FLAG_LAYOUT_INSET_DECOR
                 | WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             quickResponseParams.type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;

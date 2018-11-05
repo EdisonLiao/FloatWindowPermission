@@ -94,6 +94,13 @@ public class QuickResponseWorkView extends FrameLayout implements View.OnClickLi
         mInflater = LayoutInflater.from(getContext());
         View root = mInflater.inflate(R.layout.quick_response_word_layout, null);
         mFlexLayout = root.findViewById(R.id.flex_layout);
+        TextView tvTitle = root.findViewById(R.id.tv_title);
+        if (mIsEmoji){
+            tvTitle.setText(getResources().getString(R.string.emoji));
+        }else {
+            tvTitle.setText(getResources().getString(R.string.quick_response));
+        }
+
         root.findViewById(R.id.iv_back).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -149,18 +156,18 @@ public class QuickResponseWorkView extends FrameLayout implements View.OnClickLi
 
     private void initFlexLayout(){
         List<String> wordList = new ArrayList<>();
+        String addedWord = SharePreMgr.getAddedQuickWork();
+        if (!TextUtils.isEmpty(addedWord) && !mIsEmoji){
+            String[] addWords = addedWord.split(WORD_DIVIDER);
+            wordList.addAll(Arrays.asList(addWords));
+        }
+
         if (mIsEmoji){
             String[] list = getContext().getResources().getStringArray(R.array.emoji_array);
             wordList.addAll(Arrays.asList(list));
         }else {
             String[] list = getContext().getResources().getStringArray(R.array.response_array);
             wordList.addAll(Arrays.asList(list));
-        }
-
-        String addedWord = SharePreMgr.getAddedQuickWork();
-        if (!TextUtils.isEmpty(addedWord) && !mIsEmoji){
-            String[] addWords = addedWord.split(WORD_DIVIDER);
-            wordList.addAll(Arrays.asList(addWords));
         }
 
         for (String word: wordList){

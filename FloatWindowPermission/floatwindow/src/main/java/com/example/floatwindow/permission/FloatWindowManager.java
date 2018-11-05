@@ -165,6 +165,10 @@ public class FloatWindowManager {
         }
     }
 
+    public void applyFloatWindow(Context context){
+        showWindow(context);
+    }
+
     private void showWindow(Context context) {
         if (!isWindowDismiss) {
             Log.e(TAG, "view is already added here");

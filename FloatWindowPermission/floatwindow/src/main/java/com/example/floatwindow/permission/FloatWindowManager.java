@@ -395,6 +395,20 @@ public class FloatWindowManager {
         return false;
     }
 
+    public void dissmissAllWindows(){
+        if (floatView != null && floatView.isShowing()){
+            dismissWindow();
+        }
+
+        if (quickResponseView != null && quickResponseView.isShowing()){
+            dismissQuickResponse();
+        }
+
+        if (quickWordView != null && quickWordView.isShowing()){
+            dismissQuickWork();
+        }
+    }
+
     public void setContext(Context mContext) {
         this.mContext = mContext;
         PreferenceMgr.getIns().init(mContext);

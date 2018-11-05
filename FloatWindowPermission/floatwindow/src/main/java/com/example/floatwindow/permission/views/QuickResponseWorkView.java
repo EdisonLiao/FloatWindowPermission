@@ -39,6 +39,7 @@ public class QuickResponseWorkView extends FrameLayout implements View.OnClickLi
     private LayoutInflater mInflater;
     private static final String WORD_DIVIDER = "<";
     private IUsageRecord mUsageRecord;
+    private boolean isShowing = false;
 
     @Override
     public void onClick(View view) {
@@ -46,6 +47,14 @@ public class QuickResponseWorkView extends FrameLayout implements View.OnClickLi
             String word = (String) view.getTag();
             onWorkClick(word);
         }
+    }
+
+    public boolean isShowing() {
+        return isShowing;
+    }
+
+    public void setShowing(boolean showing) {
+        isShowing = showing;
     }
 
     public interface QuickWorkViewListener {

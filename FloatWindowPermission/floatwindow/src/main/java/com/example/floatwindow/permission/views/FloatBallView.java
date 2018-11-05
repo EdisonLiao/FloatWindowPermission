@@ -90,6 +90,10 @@ public class FloatBallView extends FrameLayout{
         this.isShowing = isShowing;
     }
 
+    public boolean isShowing() {
+        return isShowing;
+    }
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (isAnchoring) {

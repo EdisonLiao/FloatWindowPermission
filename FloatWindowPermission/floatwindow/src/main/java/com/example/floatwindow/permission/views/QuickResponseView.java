@@ -18,6 +18,7 @@ import com.example.floatwindow.R;
 public class QuickResponseView extends LinearLayout{
 
     private QuickResponseListener mListener;
+    private boolean isShowing = false;
 
     public interface QuickResponseListener{
         void onEmojiClick();
@@ -26,7 +27,15 @@ public class QuickResponseView extends LinearLayout{
         void onBackMessengerClick();
     }
 
-    public QuickResponseView(Context context,QuickResponseListener listener) {
+    public boolean isShowing() {
+        return isShowing;
+    }
+
+    public void setShowing(boolean showing) {
+        isShowing = showing;
+    }
+
+    public QuickResponseView(Context context, QuickResponseListener listener) {
         super(context);
         mListener = listener;
         initView();

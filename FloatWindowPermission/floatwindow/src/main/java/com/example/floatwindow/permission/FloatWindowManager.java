@@ -325,6 +325,7 @@ public class FloatWindowManager {
         quickResponseParams.gravity = Gravity.CENTER;
 
         quickResponseView = new QuickResponseView(mContext, quickResponseListener);
+        quickResponseView.setShowing(true);
         windowManager.addView(quickResponseView, quickResponseParams);
     }
 
@@ -349,6 +350,7 @@ public class FloatWindowManager {
         quickWordParmas.gravity = Gravity. CENTER;
 
         quickWordView = new QuickResponseWorkView(mContext,quickWorkListener,isEmoji,mUsageRecord);
+        quickWordView.setShowing(true);
         windowManager.addView(quickWordView, quickWordParmas);
     }
 
@@ -365,14 +367,32 @@ public class FloatWindowManager {
 
     private void dismissQuickResponse(){
         if (windowManager != null && quickResponseView != null) {
+            quickResponseView.setShowing(false);
             windowManager.removeViewImmediate(quickResponseView);
         }
     }
 
     private void dismissQuickWork(){
         if (windowManager != null && quickWordView != null) {
+            quickWordView.setShowing(false);
             windowManager.removeViewImmediate(quickWordView);
         }
+    }
+
+    public boolean isFloatBallShowing(){
+        if (floatView != null && floatView.isShowing()){
+            return true;
+        }
+
+        if (quickWordView != null && quickWordView.isShowing()){
+            return true;
+        }
+
+        if (quickResponseView != null && quickResponseView.isShowing()){
+            return true;
+        }
+
+        return false;
     }
 
     public void setContext(Context mContext) {

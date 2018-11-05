@@ -46,6 +46,11 @@ public class QuickResponseWorkView extends FrameLayout implements View.OnClickLi
         if (view.getId() == R.id.tv_word){
             String word = (String) view.getTag();
             onWorkClick(word);
+            if (mIsEmoji) {
+                mUsageRecord.pv(IUsageRecord.FLOATBALL_EMOJI_CLICK, word);
+            }else {
+                mUsageRecord.pv(IUsageRecord.FLOATBALL_RESPONSE_CLICK,word);
+            }
         }
     }
 
@@ -153,7 +158,7 @@ public class QuickResponseWorkView extends FrameLayout implements View.OnClickLi
         }
 
         String addedWord = SharePreMgr.getAddedQuickWork();
-        if (!TextUtils.isEmpty(addedWord)){
+        if (!TextUtils.isEmpty(addedWord) && !mIsEmoji){
             String[] addWords = addedWord.split(WORD_DIVIDER);
             wordList.addAll(Arrays.asList(addWords));
         }

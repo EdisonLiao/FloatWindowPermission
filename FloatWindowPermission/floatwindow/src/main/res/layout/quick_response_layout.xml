@@ -49,6 +49,7 @@
                     android:textSize="14sp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginStart="20dp"
+                    android:textColor="@color/white"
                     android:text="@string/emoji"/>
 
             </LinearLayout>
@@ -80,6 +81,7 @@
                     android:textSize="14sp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginStart="20dp"
+                    android:textColor="@color/white"
                     android:text="@string/quick_response"/>
 
             </LinearLayout>
@@ -111,6 +113,7 @@
                     android:textSize="14sp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginStart="20dp"
+                    android:textColor="@color/white"
                     android:text="@string/back_to_messenger"/>
 
             </LinearLayout>

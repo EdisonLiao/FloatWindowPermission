@@ -82,65 +82,160 @@
     <string name="quick_response">Quick Response</string>
     <string name="back_to_messenger">Back to Messenger</string>
 
-    <string name="emoji_0">(*^▽^*)</string>
-    <string name="emoji_1">(*^▽^*)</string>
-    <string name="emoji_2">(*^▽^*)</string>
-    <string name="emoji_3">(*^▽^*)</string>
-    <string name="emoji_4">(*^▽^*)</string>
-    <string name="emoji_5">(*^▽^*)</string>
-    <string name="emoji_6">(*^▽^*)</string>
-    <string name="emoji_7">(*^▽^*)</string>
-    <string name="emoji_8">(*^▽^*)</string>
-    <string name="emoji_9">(*^▽^*)</string>
-
-    <array name="emoji_array">
-        <item>@string/emoji_0</item>
-        <item>@string/emoji_1</item>
-        <item>@string/emoji_2</item>
-        <item>@string/emoji_3</item>
-        <item>@string/emoji_4</item>
-        <item>@string/emoji_5</item>
-        <item>@string/emoji_6</item>
-        <item>@string/emoji_7</item>
-        <item>@string/emoji_8</item>
-        <item>@string/emoji_9</item>
+    <array name="response_array">
+        <item>Received, thank you.</item>
+        <item>Thanks a lot.</item>
+        <item>Got it, thanks!</item>
+        <item>Done.</item>
+        <item>No, I don\'t.</item>
+        <item>Hope to see you soon.</item>
+        <item>Oh my god！</item>
+        <item>No, I do not.</item>
+        <item>Yes, I do.</item>
+        <item>Yes, I have one.</item>
+        <item>Thank you for your response.</item>
+        <item>Thank you for your message.</item>
+        <item>OK, I  will check.</item>
+        <item>It\'s working!</item>
+        <item>No, it\'s not.</item>
+        <item>Thanks, I\'ll check it out.</item>
+        <item>Sorry, I can\'t help you.</item>
+        <item>Yes, you can do that.</item>
     </array>
 
-    <string name="response_0">Received, thank you.</string>
-    <string name="response_1">Thanks a lot.</string>
-    <string name="response_2">Got it, thanks!</string>
-    <string name="response_3">Done.</string>
-    <string name="response_4">No, I don\'t.</string>
-    <string name="response_5">Hope to see you soon.</string>
-    <string name="response_6">Oh my god！</string>
-    <string name="response_7">No, I do not.</string>
-    <string name="response_8">Yes, I do.</string>
-    <string name="response_9">Yes, I have one.</string>
-    <string name="response_10">Thank you for your response.</string>
-    <string name="response_11">Thank you for your message.</string>
-    <string name="response_12">OK, I  will check.</string>
-    <string name="response_13">It\'s working!</string>
-    <string name="response_14">No, it\'s not.</string>
-    <string name="response_15">Thanks, I\'ll check it out.</string>
-    <string name="response_16">Sorry, I can\'t help you.</string>
-    <string name="response_17">Yes, you can do that.</string>
 
+    <array name="emoji_array">
+        <item>(°ー°〃)</item>
+        <item>ヽ(́◕◞౪◟◕‵)ﾉ</item>
+        <item>☝( ◠‿◠ )☝</item>
+        <item>( ～'ω')～</item>
+        <item>＼（○＾ω＾○）／</item>
+        <item>(๑•́ ₃ •̀๑)</item>
+        <item>٩(●˙—˙●)۶</item>
+        <item>ヾ(¯∇￣๑)</item>
+        <item>d=(´▽｀)=b</item>
+        <item>( ^▽^)σ)~O~)</item>
+        <item>٩(๑~▽~๑)۶</item>
+        <item>ﾍ(￣▽￣*)ﾉ</item>
+        <item>(っ´▽`)っ</item>
+        <item>╰(*´︶`*)╯</item>
+        <item>v(=∩_∩=)ﾌ</item>
+        <item>(◐∇◐*)</item>
+        <item>v(=∩_∩=)ﾌ</item>
+        <item>o(〃＾▽＾〃)o</item>
+        <item>(´⊙ω⊙`)</item>
+        <item>ヘ(^_^)ヘ</item>
+        <item>ノ(・ω・)ノ</item>
+        <item>`(*∩_∩*)′</item>
+        <item>↖(^ω^)↗</item>
+        <item>~\(≧▽≦)/~</item>
+        <item>ヾ(≧▽≦*)o</item>
+        <item>Ｏ(≧▽≦)Ｏ</item>
+        <item>(σ≧▽≦)σ</item>
+        <item>(๑•́ ₃ •̀๑)</item>
+        <item>(๑•̀ω•́)ノ</item>
+        <item>(๑╹◡╹๑)</item>
+        <item>( ¯•ω•¯ )</item>
+        <item>(|||ﾟдﾟ)</item>
+        <item>(￣^￣)ゞ</item>
+        <item>╮(￣▽￣)╭</item>
+        <item>_( ﾟДﾟ)ﾉ</item>
+        <item>π_π</item>
+        <item>⁄(⁄ ⁄•⁄ω⁄•⁄ ⁄)⁄</item>
+        <item>ღ ʕ̡̢̡•̫͡•ʔ̢̡̢ ღ</item>
+        <item>༼ ༎ຶ ෴ ༎ຶ༽</item>
+        <item>(´ﾟдﾟ`)</item>
+        <item>Σ(っ°Д °; )っ</item>
+        <item>_(┐ ◟;ﾟдﾟ)ノ</item>
+        <item>(｡ŏ_ŏ)</item>
+        <item>٩(｡・ω・｡),</item>
+        <item>(　ﾟ∀ﾟ) ﾉ♡</item>
+        <item>༼ つ◕_◕ ༽つ</item>
+        <item>（●´∀｀）ノ♡</item>
+        <item>～(^з^)-♡</item>
+        <item>(｡･ω･｡)ﾉ♡</item>
+        <item>L(*OεV*)E</item>
+        <item>(๑・ω-)～♥”</item>
+        <item>(灬♥ω♥灬)</item>
+        <item>(♥ω♥ ) ~♪</item>
+        <item>(♥ω♥*)</item>
+        <item>♡(∩o∩)♡</item>
+        <item>(｡’▽’｡)♡</item>
+        <item>(づ￣ ³￣)づ</item>
+        <item>(´ε｀ )♡</item>
+        <item>(´∀｀)♡</item>
+        <item>(●´з`)♡</item>
+        <item>( •̀ .̫ •́ )✧</item>
+        <item>(°ー°〃)</item>
+        <item>ᵍᵒᵒᵈ ᵑᑊ̇ᵍᑋᐪ( ᵕ·̮ᵕ )♩</item>
+        <item>٩(•ิ˓̭ •ิ )ง</item>
+        <item>ε٩(๑> ₃ &#060;)۶з</item>
+        <item>(๑•̀ㅂ•́)و ✨</item>
+        <item>(῀( ˙᷄ỏ˙᷅ )῀)ᵒᵐᵍᵎᵎᵎ</item>
+        <item>(•̤̀ᵕ•̤́๑)ᵒᵏᵎᵎᵎᵎ</item>
+        <item>ヾ（*◕ω◕*）ｼ♪</item>
+        <item>(￣_,￣ )</item>
+        <item>(ˊᵒ̴̶̷̤ ꇴ ᵒ̴̶̷̤ˋ) </item>
+        <item>๐·°(৹˃̵﹏˂̵৹)°·๐</item>
+        <item>୧(๑•̀⌄•́๑)૭✧</item>
+        <item>(ღˇ◡ˇ)♡Lᵒᵛᵉᵧₒᵤ♡</item>
+        <item>（︶︿︶）＝凸</item>
+        <item>&#060;(￣︶￣)></item>
+        <item>┑(￣Д ￣)┍</item>
+        <item>ヾ(￣▽￣)Bye~Bye~</item>
+        <item>ヽ(*。>Д&#060;)o゜</item>
+        <item>ƪ(•̃͡ε•̃͡)∫ʃ</item>
+        <item>(╭☞•́⍛•̀)╭☞</item>
+        <item>(๑ᵒ̴̶̷͈᷄ᗨᵒ̴̶̷͈᷅) </item>
+        <item>(╭￣3￣)╭♡</item>
+        <item>(∩•̀ω•́)⊃-*⋆</item>
+        <item>・ω・</item>
+        <item>(´・ω・`)</item>
+        <item>(｡･ω･｡)</item>
+        <item>(´·_·`)</item>
+        <item>( •̅_•̅ )</item>
+        <item>(๑• . •๑)</item>
+        <item>( • ̀ω•́ )✧</item>
+        <item>ᕙ(⇀‸↼‵‵)ᕗ</item>
+        <item>୧(๑•̀⌄•́๑)૭✧</item>
+        <item>(๑✦ˑ̫✦)</item>
+        <item>(。-`ω´-)</item>
+        <item>(๐•̆ ·̭ •̆๐)</item>
+        <item>( ｰ̀дｰ́ )</item>
+        <item>(╯>д&#060;)╯⁽˙³˙⁾</item>
+        <item>(・ˍ・*)</item>
+        <item>(｡･ω･)ﾉﾞ</item>
+        <item>˚‧º·(˚ ˃̣̣̥᷄⌓˂̣̣̥᷅ )‧º·˚</item>
+        <item>(☞ﾟ∀ﾟ)ﾟ∀ﾟ)☞</item>
+        <item>*ଘ(੭*ˊᵕˋ)੭* ੈ✩‧₊˚</item>
+        <item>(｀･ω･´) (´･ω･｀)</item>
+        <item>(∩^o^)⊃━☆ﾟ.*･｡</item>
+        <item>( ´･･)ﾉ(._.`)</item>
+        <item>Hi~ o(*￣▽￣*)ブ</item>
+        <item>(੭ु ›ω‹ )੭ु⁾⁾ ٩(ˊᗜˋ*)و</item>
+        <item>✧( ु•⌄• )◞◟( •⌄• ू )✧</item>
+        <item>◌⑅⃝●♡⋆♡LOVE♡⋆♡●⑅◌</item>
+        <item>o(*≧▽≦)ツ┏━┓</item>
+        <item>(┛❍ᴥ❍)┛彡┻━┻</item>
+        <item>(╯°□°）╯︵ ┻━┻</item>
+        <item>┗|o✪‿✪|ﾟo｡oﾟGOOD MORNING o｡oﾟ|✪‿✪o|┓ </item>
+        <item>♪☆＼(^０^＼) ♪(／^-^)／☆</item>
+        <item>♪ ♬ ヾ(´︶`♡)ﾉ ♬ ♪</item>
+        <item>Σ>―(〃°ω°〃)♡→</item>
+        <item>（╯°□°）╯︵(\ .o.)\</item>
+        <item>┬─┬ノ( º _ ºノ) </item>
+        <item>\(-ㅂ-)/ ♥ ♥ ♥</item>
+        <item>╭∩╮(-_-)╭∩╮</item>
+        <item>┌∩┐(◣_◢)┌∩┐</item>
+        <item>(´ ▽｀).。ｏ♡</item>
 
-
-    <array name="response_array">
-        <item>@string/response_0</item>
-        <item>@string/response_1</item>
-        <item>@string/response_2</item>
-        <item>@string/response_3</item>
-        <item>@string/response_4</item>
-        <item>@string/response_5</item>
-        <item>@string/response_6</item>
-        <item>@string/response_7</item>
-        <item>@string/response_8</item>
-        <item>@string/response_9</item>
     </array>
 
     <string name="quick_response_hint">Create your quick response</string>
     <string name="copy_success">Copy Succeed!</string>
+    <string name="float_permission_term">Floating chat requires Pop-up\n  window permission.</string>
+    <string name="set">Set</string>
+    <string name="setting_float_chat">Float Chat</string>
+    <string name="setting_float_chat_term">Convenient gadget for quick reply messages</string>
 
 </resources>

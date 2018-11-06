@@ -5,13 +5,13 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:id="@+id/ll_content"
-              android:layout_width="48dp"
-              android:layout_height="48dp">
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/iv_ball_normal"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:src="@mipmap/ic_ball_launcher_normal"/>
 
 </FrameLayout>

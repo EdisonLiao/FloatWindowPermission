@@ -64,6 +64,7 @@ public class QuickResponseWorkView extends FrameLayout implements View.OnClickLi
 
     public interface QuickWorkViewListener {
         void onWorkClose();
+        void onWorkBack();
     }
 
     public QuickResponseWorkView(@NonNull Context context, QuickWorkViewListener listener, boolean isEmoji, IUsageRecord record) {
@@ -105,7 +106,7 @@ public class QuickResponseWorkView extends FrameLayout implements View.OnClickLi
             @Override
             public void onClick(View view) {
                 if (mListener != null){
-                    mListener.onWorkClose();
+                    mListener.onWorkBack();
                 }
             }
         });
@@ -140,7 +141,7 @@ public class QuickResponseWorkView extends FrameLayout implements View.OnClickLi
                 public void onClick(View view) {
                     String word = et.getText().toString();
                     if (!TextUtils.isEmpty(word.trim()) && mFlexLayout != null){
-                        mFlexLayout.addView(addWord(word.trim()));
+                        mFlexLayout.addView(addWord(word.trim()),0);
                         ivAdd.setImageResource(R.mipmap.ic_add);
                         et.setCursorVisible(false);
                         et.setText("");

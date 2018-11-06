@@ -139,6 +139,12 @@ public class FloatWindowManager {
             dismissQuickWork();
             showWindow(mContext);
         }
+
+        @Override
+        public void onWorkBack() {
+            dismissQuickWork();
+            showQuickResponse();
+        }
     };
 
     public void applyOrShowFloatWindow(Context context) {
@@ -198,7 +204,7 @@ public class FloatWindowManager {
         mParams.type = mType;
         mParams.format = PixelFormat.RGBA_8888;
         mParams.gravity = Gravity.LEFT | Gravity.TOP;
-        mParams.x = screenWidth - DensityUtils.dp2px(context,50);
+        mParams.x = screenWidth - DensityUtils.dp2px(context,35);
         mParams.y = screenHeight / 2;
 
 

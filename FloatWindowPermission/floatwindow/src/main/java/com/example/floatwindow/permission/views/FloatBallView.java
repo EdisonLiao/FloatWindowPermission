@@ -62,6 +62,9 @@ public class FloatBallView extends FrameLayout{
     private WindowManager windowManager = null;
     private WindowManager.LayoutParams mParams = null;
     private FloatBallListener mListener;
+    private int mMinHeight = 0;
+    private int mScreenHeight = 0;
+    private int mBallRadius = 0;
 
     public interface FloatBallListener{
         void onFloatBallMoving(int x, int y);
@@ -73,6 +76,8 @@ public class FloatBallView extends FrameLayout{
         super(context);
         mListener = listener;
         initView();
+        mMinHeight = DensityUtils.dp2px(context,36); //屏幕底部到删除文字的高度36
+        mBallRadius = DensityUtils.dp2px(context,48);//圆球直径
     }
 
     private void initView() {
@@ -80,6 +85,9 @@ public class FloatBallView extends FrameLayout{
         LayoutInflater inflater = LayoutInflater.from(getContext());
         View floatView = inflater.inflate(R.layout.float_window_layout, null);
         addView(floatView);
+        Point size = new Point();
+        windowManager.getDefaultDisplay().getSize(size);
+        mScreenHeight = size.y;
 
     }
 
@@ -207,7 +215,13 @@ public class FloatBallView extends FrameLayout{
             if (System.currentTimeMillis() >= currentStartTime + animTime) {
                 if (mParams.x != (startX + xDistance) || mParams.y != (startY + yDistance)) {
                     mParams.x = startX + xDistance;
-                    mParams.y = startY + yDistance;
+                    int y = startY + yDistance;
+                    int min = mScreenHeight - mMinHeight;
+                    if (y >= min){
+                        y = min - mBallRadius;
+                    }
+                    mParams.y = y;
+
                     windowManager.updateViewLayout(FloatBallView.this, mParams);
                 }
                 isAnchoring = false;
@@ -229,9 +243,8 @@ public class FloatBallView extends FrameLayout{
 
     private void updateViewPosition() {
         //增加移动误差
-        mParams.x = (int) (xInScreen - xInView);
         mParams.y = (int) (yInScreen - yInView);
-        Log.e(TAG, "x  " + mParams.x + "   y  " + mParams.y);
+        mParams.x = (int) (xInScreen - xInView);
         windowManager.updateViewLayout(this, mParams);
     }
 }

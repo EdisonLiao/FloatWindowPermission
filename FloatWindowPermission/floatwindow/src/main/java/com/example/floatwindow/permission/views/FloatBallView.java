@@ -16,6 +16,7 @@ import android.view.animation.Interpolator;
 import android.widget.FrameLayout;
 
 import com.example.floatwindow.R;
+import com.example.floatwindow.permission.DensityUtils;
 
 
 /**
@@ -155,7 +156,7 @@ public class FloatBallView extends FrameLayout{
         int xDistance = 0;
         int yDistance = 0;
 
-        int dp_25 = 0;
+        int dp_25 = -DensityUtils.dp2px(getContext(),15);
 
         //1
         if (middleX <= dp_25 + getWidth() / 2) {

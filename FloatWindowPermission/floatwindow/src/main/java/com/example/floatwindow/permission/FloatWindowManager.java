@@ -188,8 +188,7 @@ public class FloatWindowManager {
         mParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
         mParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
         mParams.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
-                | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_LAYOUT_INSET_DECOR
-                | WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN;
+                | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS;
         int mType;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             mType = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
@@ -199,7 +198,7 @@ public class FloatWindowManager {
         mParams.type = mType;
         mParams.format = PixelFormat.RGBA_8888;
         mParams.gravity = Gravity.LEFT | Gravity.TOP;
-        mParams.x = screenWidth;
+        mParams.x = screenWidth - DensityUtils.dp2px(context,50);
         mParams.y = screenHeight / 2;
 
 

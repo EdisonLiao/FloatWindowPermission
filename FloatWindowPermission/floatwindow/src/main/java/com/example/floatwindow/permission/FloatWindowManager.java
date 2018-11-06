@@ -215,7 +215,7 @@ public class FloatWindowManager {
         mParams.format = PixelFormat.RGBA_8888;
         mParams.gravity = Gravity.LEFT | Gravity.TOP;
         mParams.x = screenWidth - DensityUtils.dp2px(context,35);
-        mParams.y = screenHeight / 2;
+        mParams.y = screenHeight / 2 - DensityUtils.dp2px(context,70);
 
 
         floatView = new FloatBallView(context,listener);

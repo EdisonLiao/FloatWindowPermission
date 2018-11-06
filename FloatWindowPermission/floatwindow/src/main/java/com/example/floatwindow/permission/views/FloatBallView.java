@@ -76,7 +76,7 @@ public class FloatBallView extends FrameLayout{
         super(context);
         mListener = listener;
         initView();
-        mMinHeight = DensityUtils.dp2px(context,36); //屏幕底部到删除文字的高度36
+        mMinHeight = DensityUtils.dp2px(context,60); //屏幕底部到删除文字的高度36
         mBallRadius = DensityUtils.dp2px(context,48);//圆球直径
     }
 
@@ -185,8 +185,8 @@ public class FloatBallView extends FrameLayout{
         }
         Log.e(TAG, "xDistance  " + xDistance + "   yDistance" + yDistance);
 
-        animTime = Math.abs(xDistance) > Math.abs(yDistance) ? (int) (((float) xDistance / (float) screenWidth) * 300f)
-                : (int) (((float) yDistance / (float) screenHeight) * 600f);
+        animTime = Math.abs(xDistance) > Math.abs(yDistance) ? (int) (((float) xDistance / (float) screenWidth) * 100f)
+                : (int) (((float) yDistance / (float) screenHeight) * 300f);
         this.post(new AnchorAnimRunnable(Math.abs(animTime), xDistance, yDistance, System.currentTimeMillis()));
     }
 
@@ -232,7 +232,14 @@ public class FloatBallView extends FrameLayout{
             int yMoveDistance = (int) (yDistance * delta);
             Log.e(TAG, "delta:  " + delta + "  xMoveDistance  " + xMoveDistance + "   yMoveDistance  " + yMoveDistance);
             mParams.x = startX + xMoveDistance;
-            mParams.y = startY + yMoveDistance;
+            int y = startY + yMoveDistance;
+            int min = mScreenHeight - mMinHeight;
+            if (y >= min){
+                y = min - mBallRadius;
+            }
+            mParams.y = y;
+            Log.e("yDis","postRun");
+
             if (!isShowing) {
                 return;
             }

@@ -46,10 +46,16 @@ public class QuickResponseWorkView extends FrameLayout implements View.OnClickLi
         if (view.getId() == R.id.tv_word){
             String word = (String) view.getTag();
             onWorkClick(word);
-            if (mIsEmoji) {
-                mUsageRecord.pv(IUsageRecord.FLOATBALL_EMOJI_CLICK, word);
-            }else {
-                mUsageRecord.pv(IUsageRecord.FLOATBALL_RESPONSE_CLICK,word);
+            if (mUsageRecord != null) {
+                if (mIsEmoji) {
+                    mUsageRecord.pv(IUsageRecord.FLOATBALL_EMOJI_CLICK, word);
+                } else {
+                    mUsageRecord.pv(IUsageRecord.FLOATBALL_RESPONSE_CLICK, word);
+                }
+            }
+
+            if (mListener != null){
+                mListener.onWorkClose();
             }
         }
     }
@@ -147,7 +153,9 @@ public class QuickResponseWorkView extends FrameLayout implements View.OnClickLi
                         et.setText("");
                         hideKeyBoard();
                         saveWord(word.trim());
-                        mUsageRecord.pv(IUsageRecord.FLOATBALL_RESPONSE_ADD);
+                        if (mUsageRecord != null) {
+                            mUsageRecord.pv(IUsageRecord.FLOATBALL_RESPONSE_ADD);
+                        }
                     }
                 }
             });

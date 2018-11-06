@@ -76,7 +76,9 @@ public class FloatWindowManager {
             dismissBottomBar();
             if (isBottomBarRed){
                 dismissWindow();
-                mUsageRecord.pv(IUsageRecord.FLOATBALL_CLOSE);
+                if (mUsageRecord != null) {
+                    mUsageRecord.pv(IUsageRecord.FLOATBALL_CLOSE);
+                }
             }
         }
 
@@ -84,7 +86,9 @@ public class FloatWindowManager {
         public void onFloatBallClicked() {
             dismissWindow();
             showQuickResponse();
-            mUsageRecord.pv(IUsageRecord.FLOATBALL_CLICK);
+            if (mUsageRecord != null) {
+                mUsageRecord.pv(IUsageRecord.FLOATBALL_CLICK);
+            }
         }
     };
 
@@ -106,14 +110,18 @@ public class FloatWindowManager {
         public void onEmojiClick() {
             dismissQuickResponse();
             showQuickWord(true);
-            mUsageRecord.pv(IUsageRecord.FLOATBALL_EMOJI);
+            if (mUsageRecord != null) {
+                mUsageRecord.pv(IUsageRecord.FLOATBALL_EMOJI);
+            }
         }
 
         @Override
         public void onQuickClick() {
             dismissQuickResponse();
             showQuickWord(false);
-            mUsageRecord.pv(IUsageRecord.FLOATBALL_RESPONSE);
+            if (mUsageRecord != null) {
+                mUsageRecord.pv(IUsageRecord.FLOATBALL_RESPONSE);
+            }
         }
 
         @Override
@@ -126,7 +134,9 @@ public class FloatWindowManager {
         public void onBackMessengerClick() {
             if (mCallback != null){
                 mCallback.backToMessenger();
-                mUsageRecord.pv(IUsageRecord.FLOATBALL_BACK_CLICK);
+                if (mUsageRecord != null) {
+                    mUsageRecord.pv(IUsageRecord.FLOATBALL_BACK_CLICK);
+                }
                 dismissQuickResponse();
                 showWindow(mContext);
             }
@@ -212,7 +222,9 @@ public class FloatWindowManager {
         floatView.setParams(mParams);
         floatView.setIsShowing(true);
         windowManager.addView(floatView, mParams);
-        mUsageRecord.pv(IUsageRecord.FLOATBALL_SHOW);
+        if (mUsageRecord != null) {
+            mUsageRecord.pv(IUsageRecord.FLOATBALL_SHOW);
+        }
     }
 
     private void handleBottomBarBg(int x, int y){

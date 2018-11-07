@@ -271,7 +271,7 @@ public class FloatWindowManager {
     }
 
     public void dismissWindow() {
-        if (isWindowDismiss) {
+        if (isWindowDismiss || floatView == null) {
             Log.e(TAG, "window can not be dismiss cause it has not been added");
             return;
         }

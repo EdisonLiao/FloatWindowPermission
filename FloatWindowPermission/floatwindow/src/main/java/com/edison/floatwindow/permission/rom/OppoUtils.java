@@ -1,4 +1,4 @@
-package com.example.floatwindow.permission.rom;
+package com.edison.floatwindow.permission.rom;
 
 import android.annotation.TargetApi;
 import android.app.AppOpsManager;

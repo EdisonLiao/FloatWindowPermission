@@ -1,4 +1,4 @@
-package com.example.floatwindow.permission;
+package com.edison.floatwindow.permission;
 
 /**
  * created by edison 2018/11/2

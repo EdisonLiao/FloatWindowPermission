@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 2016 Facishare Technology Co., Ltd. All Rights Reserved.
  */
-package com.example.floatwindow.permission;
+package com.edison.floatwindow.permission;
 
 import android.content.Context;
 import android.graphics.PixelFormat;
@@ -12,11 +12,11 @@ import android.view.Gravity;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
-import com.example.floatwindow.R;
-import com.example.floatwindow.permission.views.BottomBarView;
-import com.example.floatwindow.permission.views.FloatBallView;
-import com.example.floatwindow.permission.views.QuickResponseView;
-import com.example.floatwindow.permission.views.QuickResponseWorkView;
+import com.edison.floatwindow.R;
+import com.edison.floatwindow.permission.views.BottomBarView;
+import com.edison.floatwindow.permission.views.FloatBallView;
+import com.edison.floatwindow.permission.views.QuickResponseView;
+import com.edison.floatwindow.permission.views.QuickResponseWorkView;
 
 
 /**

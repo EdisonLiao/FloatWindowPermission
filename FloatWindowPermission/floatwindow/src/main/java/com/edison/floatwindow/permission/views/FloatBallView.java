@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 2016 Facishare Technology Co., Ltd. All Rights Reserved.
  */
-package com.example.floatwindow.permission.views;
+package com.edison.floatwindow.permission.views;
 
 import android.content.Context;
 import android.graphics.Point;
@@ -15,8 +15,8 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.widget.FrameLayout;
 
-import com.example.floatwindow.R;
-import com.example.floatwindow.permission.DensityUtils;
+import com.edison.floatwindow.R;
+import com.edison.floatwindow.permission.DensityUtils;
 
 
 /**

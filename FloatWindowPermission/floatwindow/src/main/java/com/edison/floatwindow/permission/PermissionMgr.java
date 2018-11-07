@@ -1,4 +1,4 @@
-package com.example.floatwindow.permission;
+package com.edison.floatwindow.permission;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,12 +8,12 @@ import android.provider.Settings;
 import android.util.Log;
 
 
-import com.example.floatwindow.permission.rom.HuaweiUtils;
-import com.example.floatwindow.permission.rom.MeizuUtils;
-import com.example.floatwindow.permission.rom.MiuiUtils;
-import com.example.floatwindow.permission.rom.OppoUtils;
-import com.example.floatwindow.permission.rom.QikuUtils;
-import com.example.floatwindow.permission.rom.RomUtils;
+import com.edison.floatwindow.permission.rom.HuaweiUtils;
+import com.edison.floatwindow.permission.rom.MeizuUtils;
+import com.edison.floatwindow.permission.rom.MiuiUtils;
+import com.edison.floatwindow.permission.rom.OppoUtils;
+import com.edison.floatwindow.permission.rom.QikuUtils;
+import com.edison.floatwindow.permission.rom.RomUtils;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;

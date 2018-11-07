@@ -1,4 +1,4 @@
-package com.example.floatwindow.permission.adapters;
+package com.edison.floatwindow.permission.adapters;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 
-import com.example.floatwindow.R;
+import com.edison.floatwindow.R;
 
 import java.util.ArrayList;
 import java.util.List;

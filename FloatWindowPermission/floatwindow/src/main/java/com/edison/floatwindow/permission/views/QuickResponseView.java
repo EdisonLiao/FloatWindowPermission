@@ -1,4 +1,4 @@
-package com.example.floatwindow.permission.views;
+package com.edison.floatwindow.permission.views;
 
 import android.content.Context;
 import android.os.Build;
@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.example.floatwindow.R;
+import com.edison.floatwindow.R;
 
 
 /**

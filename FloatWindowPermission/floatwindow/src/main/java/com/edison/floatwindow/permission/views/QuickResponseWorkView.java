@@ -1,4 +1,4 @@
-package com.example.floatwindow.permission.views;
+package com.edison.floatwindow.permission.views;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -18,9 +18,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.floatwindow.R;
-import com.example.floatwindow.permission.IUsageRecord;
-import com.example.floatwindow.permission.SharePreMgr;
+import com.edison.floatwindow.R;
+import com.edison.floatwindow.permission.IUsageRecord;
+import com.edison.floatwindow.permission.SharePreMgr;
 import com.google.android.flexbox.FlexboxLayout;
 
 import java.util.ArrayList;

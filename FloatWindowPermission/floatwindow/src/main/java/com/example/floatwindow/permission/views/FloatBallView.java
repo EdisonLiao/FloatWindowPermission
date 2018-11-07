@@ -222,6 +222,9 @@ public class FloatBallView extends FrameLayout{
                     }
                     mParams.y = y;
 
+                    if (!isShowing) {
+                        return;
+                    }
                     windowManager.updateViewLayout(FloatBallView.this, mParams);
                 }
                 isAnchoring = false;

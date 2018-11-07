@@ -10,6 +10,9 @@ import android.view.View;
 public class DensityUtils {
 
     public static int dp2px(Context context, float dp){
+        if (context == null){
+            return 0;
+        }
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dp * scale + 0.5f);
     }

@@ -158,6 +158,9 @@ public class FloatWindowManager {
     };
 
     public void applyOrShowFloatWindow(Context context) {
+        if (context == null){
+            return;
+        }
         if (mPermissionMgr.checkPermission(context)) {
             showWindow(context);
         } else {
@@ -166,6 +169,9 @@ public class FloatWindowManager {
     }
 
     public boolean checkFloatWindowPermission(Context context){
+        if (context == null){
+            return false;
+        }
         if (mPermissionMgr != null){
             return mPermissionMgr.checkPermission(context);
         }else {
@@ -174,18 +180,28 @@ public class FloatWindowManager {
     }
 
     public void applyFloatWindowPermission(Context context){
+        if (context == null){
+            return;
+        }
         if (mPermissionMgr != null){
             mPermissionMgr.applyPermission(context);
         }
     }
 
     public void applyFloatWindow(Context context){
+        if (context == null){
+            return;
+        }
         showWindow(context);
     }
 
     private void showWindow(Context context) {
         if (!isWindowDismiss) {
             Log.e(TAG, "view is already added here");
+            return;
+        }
+
+        if (context == null || mContext == null){
             return;
         }
 
@@ -228,6 +244,10 @@ public class FloatWindowManager {
     }
 
     private void handleBottomBarBg(int x, int y){
+        if (mContext == null){
+            return;
+        }
+
         if (bottomBar != null){
             ImageView ivBg = bottomBar.findViewById(R.id.iv_bottom_bg);
             int floatBallCenterX = x + mFloatBallRadiu;
@@ -264,6 +284,9 @@ public class FloatWindowManager {
     }
 
     private void showBottomBar(Context context) {
+        if (context == null || mContext == null){
+            return;
+        }
 
         if (!isBottomBarDismiss) {
             return;
@@ -303,6 +326,10 @@ public class FloatWindowManager {
     }
 
     private void showQuickResponse(){
+        if (mContext == null){
+            return;
+        }
+
         if (windowManager == null) {
             windowManager =
                     (WindowManager) mContext.getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
@@ -328,6 +355,10 @@ public class FloatWindowManager {
     }
 
     private void showQuickWord(boolean isEmoji){
+        if (mContext == null){
+            return;
+        }
+
         if (windowManager == null) {
             windowManager =
                     (WindowManager) mContext.getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
